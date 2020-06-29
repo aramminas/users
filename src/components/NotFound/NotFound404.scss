@@ -1,0 +1,23 @@
+.not-found-content {
+  & .background-content {
+    & figure {
+      text-align: center;
+      & img {
+        width: 35%;
+        height: 35%;
+      }
+    }
+    & .message{
+      text-align: center;
+      position: absolute;
+      width: 100%;
+      transform: translateY(-50%);
+
+      & h1 {
+        font-size: 144px;
+        font-weight: 100;
+        margin-bottom: 16px;
+      }
+    }
+  }
+}

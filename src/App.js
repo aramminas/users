@@ -1,12 +1,13 @@
 import React from 'react'
-import './App.css'
+import router from './router'
+import './App.scss'
 
 function App() {
-  return (
-    <div className="App">
-        <h1>Users List</h1>
-    </div>
-  )
+    return (
+        <>
+            {router}
+        </>
+    )
 }
 
 export default App

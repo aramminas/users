@@ -1,0 +1,142 @@
+/* Main styles  */
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  & .header {
+    flex: 0 1 auto;
+  }
+
+  & .welcome-container {
+    flex: 1 1 auto;
+  }
+
+  & .main-footer {
+    flex: 0 1 auto;
+  }
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.main-loader {
+  height: 100vh;
+  width: 100%;
+  @extend .flex;
+}
+
+.main-footer {
+  height: 80px;
+  background-color: black;
+  opacity: .7;
+  @extend .flex;
+
+  & .footer-content {
+    height: 80px;
+    @extend .flex;
+  }
+}
+
+.empty-data-loader {
+  height: 450px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  @extend .flex;
+  & > div {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  & span {
+    color: #1079f8;
+    font-size: 20px;
+  }
+}
+
+.welcome-container {
+  padding: 25px;
+  background-color: ghostwhite;
+
+  & .welcome-title {
+    font-family: 'Droid serif', serif;
+    font-size: 50px;
+    font-style: italic;
+    line-height: 58px;
+    margin: 22px 0;
+    text-align: center;
+    font-weight: 600;
+    background-color: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+  }
+
+  & .users-list-switch {
+    padding-left: 2%;
+  }
+}
+
+/* User Edit part*/
+.user-edit-container {
+  width: 100%;
+  @extend .flex;
+
+  & .user-edit-image {
+    width: 221px;
+    height: 221px;
+    border-radius: 50%;
+  }
+
+  & .user-edit-section {
+    margin-bottom: 25px;
+
+    & h1 {
+      color: #337ab7;
+    }
+
+    & .user-edit-name {
+      text-transform: capitalize;
+      font-style: italic;
+      font-size: 20px;
+      margin: 10px 0;
+      font-weight: 400;
+    }
+
+    & form label {
+      font-size: 20px;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    & button {
+      font-weight: 600;
+    }
+
+    & #input-change-type:focus {
+      background-color: white;
+    }
+  }
+}
