@@ -43,6 +43,7 @@ class Welcome extends Component {
 
     getUserDataFromMainApi = (restore = false) => {
         if(this.state.users.length === 0 || restore === true){
+            restore && this.setState(prevState => ({...prevState, users: []}))
             axios.get(`${apiUrl}/users`)
                 .then(res => {
                     if((res.status === 200 || res.statusText === "OK") && res.data && res.data.length > 0){

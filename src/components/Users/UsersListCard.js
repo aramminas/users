@@ -95,7 +95,16 @@ class UsersListCard extends Component {
                 this.handleClose()
                 this.props.refreshData()
                 this.setState((prevState) => {
-                    return {...prevState, amount: this.props.users.length -1}
+                    let limit = this.state.limit
+                    let offset = this.state.offset
+                    if(limit >= this.props.users.length){
+                        limit = this.props.users.length - 1
+                    }
+                    if(limit === offset) {
+                        let temp = offset - 6
+                        offset = temp >= 0 ? temp : 0
+                    }
+                    return {...prevState, amount: this.props.users.length - 1, offset, limit}
                 })
                 toast.success(this.state.lang.success_user_deleted)
             }
@@ -127,18 +136,18 @@ class UsersListCard extends Component {
         finish = false
         start = false
         if(temp >= 0){
-            offset = temp
+            let difference = 6 - (limit - offset)
+            offset = temp - difference
             limit -= 6
             if(offset === 0){
                 start = true
+            }else if(offset < 0){
+                offset = 0
             }
         }else {
-            let check = offset - 1
-            if(check <= 0){
-                offset = 0
-                limit = 6
-                start = true
-            }
+            offset = 0
+            limit = 6
+            start = true
         }
 
         this.setState((prevState) => {
@@ -163,6 +172,7 @@ class UsersListCard extends Component {
 
         if(limit >= amount){
             finish = true
+            limit = amount
         }
 
         this.setState((prevState) => {
@@ -248,6 +258,7 @@ class UsersListCard extends Component {
             <div>
                 <div style={classes.root} className={"users-list-card"}>
                     <h2>{!this.props.editUser ? lang.users_list : lang.edit_user}</h2>
+                    <hr/>
                     <Grid container spacing={3}>
                         { !this.props.editUser ?
                             <Grid container style={classes.paddingLR} spacing={3}>
@@ -260,6 +271,10 @@ class UsersListCard extends Component {
                                         >
                                             <ArrowLeftRounded fontSize={"large"}/>
                                         </IconButton>
+                                        <IconButton color="primary" aria-label="previous" component="span">
+                                            {this.state.offset + 1}
+                                        </IconButton>
+                                        <span className={"previous-next-drop"}>-</span>
                                         <IconButton color="primary" aria-label="previous" component="span">
                                             {this.state.limit}
                                         </IconButton>

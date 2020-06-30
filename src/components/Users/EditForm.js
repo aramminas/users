@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Input, InputLabel, InputAdornment, FormControl, Grid, Button, MenuItem, Select} from '@material-ui/core'
-import {AccountCircle, Fingerprint, Ballot} from '@material-ui/icons'
+import {AccountCircle, Fingerprint, Ballot, Edit, BackspaceOutlined, CancelOutlined} from '@material-ui/icons'
 
 const classes = {
     root: {
@@ -26,6 +26,7 @@ class EditForm extends Component {
 
     state = {
         userData: {...this.props.data},
+        editBtn: false,
     }
 
     handleChange = (event) => {
@@ -57,6 +58,7 @@ class EditForm extends Component {
 
     handleEditUserData = (event) => {
         event.preventDefault()
+        this.setState(prevState => ({...prevState, editBtn: true}))
         this.props.editUserData(this.state.userData)
     }
 
@@ -141,8 +143,12 @@ class EditForm extends Component {
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} style={classes.w100}>
-                        <Button variant="contained" style={classes.margin} onClick={handleCancelEditUser}>{lang.cancel}</Button>
-                        <Button variant="contained" color="primary" style={classes.margin} type={"submit"}>
+                        <Button variant="contained" style={classes.margin} onClick={handleCancelEditUser}
+                            startIcon={this.state.editBtn ? <BackspaceOutlined /> : <CancelOutlined />}
+                        >
+                            {this.state.editBtn ? lang.back : lang.cancel}
+                        </Button>
+                        <Button variant="contained" color="primary" style={classes.margin} type={"submit"} startIcon={<Edit />}>
                             {lang.edit}
                         </Button>
                     </Grid>
